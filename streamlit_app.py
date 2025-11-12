@@ -1,5 +1,6 @@
 # Import python packages
 import streamlit as st
+import requests
 #import snowflake.connector
 from snowflake.snowpark.functions import col, when_matched
 # Write directly to the app
@@ -40,6 +41,9 @@ if ingredients_list:
     #st.write(my_insert_stmt)
     #st.stop()
     time_to_insert = st.button('Submit Order')
+
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
