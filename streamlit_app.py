@@ -10,11 +10,6 @@ st.write(
   """   
 )
 
-#option = st.selectbox('What is your favourite fruit?',
-#                     ('Banana','Strawberries','Peaches'))
-#st.write('You selected:',option) FOR DROP DOWN(NO LONGER NEEDED IF USING DB)
-
-
 name_on_order = st.text_input('Name on Smoothie:')
 st.write("The name on your Smoothie will be ", name_on_order)
 
@@ -28,13 +23,15 @@ ingredients_list = st.multiselect(
     my_dataframe
     , max_selections =5
 )
+
+
+
 if ingredients_list:
-    #st.write(ingredients_list)
-    #st.text(ingredients_list)
     ingredients_string = ''
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
-    #st.write(ingredients_string)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df = st.dataframe(data = smoothiefroot_response.json(), use_container_width = True)
 
     my_insert_stmt = """ INSERT INTO SMOOTHIES.PUBLIC.ORDERS(ingredients,name_on_order) 
     VALUES ('"""+ingredients_string+"""','"""+name_on_order+"""')"""
@@ -47,6 +44,4 @@ if ingredients_list:
 
 
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-#st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data = smoothiefroot_response.json(), use_container_width = True)
+
