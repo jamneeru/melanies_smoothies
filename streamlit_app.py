@@ -1,7 +1,6 @@
 # Import python packages
 import streamlit as st
 import snowflake.connector
-import snowflake.snowpark import session
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col, when_matched
 # Write directly to the app
